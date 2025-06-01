@@ -203,10 +203,10 @@ type FruitType = keyof typeof fruitMultipliers;
 
 const plantNameMap: Record<string, PlantName> = {
 	"Celestiberry": "celestiberry",
-  "Moonmango": "moonmango",
-  "Eggplant": "eggplant",
-  "Bloodbanana": "bloodbanana",
-  "Lotus": "lotus",
+	"Moonmango": "moonmango",
+	"Eggplant": "eggplant",
+	"Bloodbanana": "bloodbanana",
+	"Lotus": "lotus",
 	"Carrot": "carrot",
 	"Strawberry": "strawberry",
 	"Blueberry": "blueberry",
@@ -248,6 +248,7 @@ const plantNameMap: Record<string, PlantName> = {
 	"Starfruit": "starfruit",
 	"Moonglow": "moonglow",
 	"Moon Blossom": "moonblossom",
+	"Moon Melon": "moonmelon",
 	"Foxglove": "foxglove",
 	"Lilac": "lilac",
 	"Pink Lily": "pinklily",
@@ -363,7 +364,7 @@ export default function GardenCalculator() {
 		} else {
 			setSelectedPlant({ name: plant.name, value: plant.value })
 			setCustomValue("")
-			// Ustaw domyślną wagę z plantBaseData
+
 			const plantKey = plantNameMap[plant.name]
 			if (plantKey && plantBaseData[plantKey]) {
 				setWeight(plantBaseData[plantKey].weight.toString())
