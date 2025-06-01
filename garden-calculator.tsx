@@ -418,17 +418,9 @@ export default function GardenCalculator() {
 										/>
 										{showDropdown && (
 											<div
-												className="absolute top-full left-0 right-0 z-50 mt-1 bg-white dark:bg-gray-800 border border-green-300 dark:border-gray-600 rounded-2xl shadow-lg max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-transparent"
-												tabIndex={0}
-												style={{ minWidth: 0, pointerEvents: 'auto' }}
-												onWheel={e => {
-													// Only stop propagation, do not preventDefault
-													e.stopPropagation();
-												}}
-												onMouseDown={e => {
-													// Only stop propagation, do not preventDefault
-													e.stopPropagation();
-												}}
+												className="absolute top-full left-0 right-0 z-50 mt-1 bg-white dark:bg-gray-800 border border-green-300 dark:border-gray-600 rounded-2xl shadow-lg overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-transparent"
+												style={{ maxHeight: "300px" }}
+												onClick={(e) => e.stopPropagation()}
 											>
 												{filteredPlants.length > 0 ? (
 													filteredPlants.map((plant, index) => (
