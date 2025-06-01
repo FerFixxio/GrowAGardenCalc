@@ -84,10 +84,12 @@ const plantData = [
 	{
 		category: "Bizzy Bee Event",
 		plants: [
+			{ name: "Rose", value: 4513 },
 			{ name: "Foxglove", value: 18050 },
 			{ name: "Lilac", value: 31588 },
 			{ name: "Pink Lily", value: 58663 },
 			{ name: "Purple Dahila", value: 67688 },
+			{ name: "Nectarine", value: 35000 },
 			{ name: "Hive Fruit", value: 6000 },
 			{ name: "Sunflower", value: 200000 },
 		],
@@ -212,15 +214,15 @@ export default function GardenCalculator() {
 	const calculateValue = () => {
 		const baseValue = getBaseValue()
 		const weightValue = Number.parseFloat(weight) || 0
-		const coreMultiplier = Number.parseFloat(coreMutation)
+		const coreMultiplier = Number.parseFloat(coreMutation) || 1
 
 		const stackSum = envMutations.reduce((sum, mutationName) => {
 			const mutation = environmentalMutations.find((m) => m.name === mutationName)
 			return sum + (mutation?.bonus || 0)
 		}, 0)
 
-		const totalGrowthMultiplier = coreMultiplier * (1 + stackSum)
-		return baseValue * totalGrowthMultiplier * weightValue
+		const totalValue = (baseValue * (1 + stackSum)) * coreMultiplier * weightValue
+		return totalValue
 	}
 
 	const estimatedValue = calculateValue()
@@ -413,46 +415,58 @@ export default function GardenCalculator() {
 												setShowDropdown(true)
 											}}
 											onFocus={() => setShowDropdown(true)}
-											className="bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm border-green-300/50 dark:border-gray-600/50 text-gray-800 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 rounded-2xl h-12 px-4 transition-all duration-300"
+											className="bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm border-green-300/50 dark:border-gray-600/50 text-gray-800 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 rounded-2xl h-12 px-4 pr-12 transition-all duration-300" // pr-12 for space for the X
 											autoComplete="off"
 										/>
-										{showDropdown && (
-											<div
-												className="absolute top-full left-0 right-0 z-50 mt-1 bg-white dark:bg-gray-800 border border-green-300 dark:border-gray-600 rounded-2xl shadow-lg max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-transparent"
-												tabIndex={0}
-												style={{ minWidth: 0, pointerEvents: 'auto' }}
-												onWheel={e => {
-													// Only stop propagation, do not preventDefault
-													e.stopPropagation();
+										{searchTerm && (
+											<button
+												type="button"
+												className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 bg-transparent p-1 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400"
+												onClick={() => {
+													setSearchTerm("")
+													setShowDropdown(true)
 												}}
-												onMouseDown={e => {
-													// Only stop propagation, do not preventDefault
-													e.stopPropagation();
-												}}
+												aria-label="Clear search"
 											>
-												{filteredPlants.length > 0 ? (
-													filteredPlants.map((plant, index) => (
-														<button
-															key={`${plant.name}-${index}`}
-															type="button"
-															onClick={() => handlePlantSelect(plant)}
-															className={`w-full text-left px-4 py-2 hover:bg-green-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100 border-b border-green-200 dark:border-gray-700 last:border-b-0 focus:bg-green-200 dark:focus:bg-gray-600 outline-none${selectedPlant?.name === plant.name ? ' bg-green-50 dark:bg-gray-700' : ''}`}
-														>
-															<div className="flex justify-between items-center">
-																<span className="font-medium">{plant.name}</span>
-																{plant.name !== "Custom Value" && (
-																	<span className="text-sm text-gray-600 dark:text-gray-400">
-																		${plant.value.toLocaleString()}
-																	</span>
-																)}
-															</div>
-															<div className="text-xs text-gray-500 dark:text-gray-400">{plant.category}</div>
-														</button>
-													))
-												) : (
-													<div className="px-4 py-3 text-gray-500 dark:text-gray-400">No plants found</div>
-												)}
-											</div>
+												<svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+													<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+												</svg>
+											</button>
+										)}
+										{showDropdown && (
+											<>
+												<div
+													className="absolute top-full left-0 right-0 z-50 mt-1 bg-white dark:bg-gray-800 border border-green-300 dark:border-gray-600 rounded-2xl shadow-lg max-h-64 overflow-y-auto scrollbar-thin scrollbar-thumb-green-300 scrollbar-track-transparent"
+													tabIndex={0}
+												>
+													{filteredPlants.length > 0 ? (
+														filteredPlants.map((plant, index) => (
+															<button
+																key={`${plant.name}-${index}`}
+																type="button"
+																onClick={() => {
+																	handlePlantSelect(plant)
+																	setShowDropdown(false)
+																}}
+																className={`w-full text-left px-4 py-2 hover:bg-green-100 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-100 border-b border-green-200 dark:border-gray-700 last:border-b-0 focus:bg-green-200 dark:focus:bg-gray-600 outline-none${selectedPlant?.name === plant.name ? ' bg-green-50 dark:bg-gray-700' : ''}`}
+															>
+																<div className="flex justify-between items-center">
+																	<span className="font-medium">{plant.name}</span>
+																	{plant.name !== "Custom Value" && (
+																		<span className="text-sm text-gray-600 dark:text-gray-400">
+																			${plant.value.toLocaleString()}
+																		</span>
+																	)}
+																</div>
+																<div className="text-xs text-gray-500 dark:text-gray-400">{plant.category}</div>
+															</button>
+														))
+													) : (
+														<div className="px-4 py-3 text-gray-500 dark:text-gray-400">No plants found</div>
+													)}
+												</div>
+												<div className="fixed inset-0 z-40" onClick={() => setShowDropdown(false)} />
+											</>
 										)}
 									</div>
 								</div>
@@ -709,7 +723,6 @@ export default function GardenCalculator() {
 			</div>
 
 			{/* Click outside to close dropdown */}
-			{showDropdown && <div className="fixed inset-0 z-40" onClick={() => setShowDropdown(false)} />}
 		</motion.div>
 	)
 }
