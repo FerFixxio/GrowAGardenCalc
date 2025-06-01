@@ -705,10 +705,7 @@ export default function GardenCalculator() {
 														</span>
 														<span className="font-mono text-xl">
 															$
-															{estimatedValue.toLocaleString(undefined, {
-																minimumFractionDigits: 2,
-																maximumFractionDigits: 2,
-															})}
+															{Math.round(estimatedValue).toLocaleString()}
 														</span>
 													</motion.div>
 												</div>
