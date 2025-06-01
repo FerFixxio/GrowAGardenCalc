@@ -114,6 +114,205 @@ const environmentalMutations = [
 	{ name: "Voidtouched", emoji: "🌌", bonus: 134, color: "text-purple-900 dark:text-purple-300" },
 ]
 
+const modifiers = {
+	frozen: 9,
+	choc: 1,
+	celestial: 119,
+	shocked: 99,
+	wet: 1,
+	chilled: 1,
+	moonlit: 1,
+	bloodlit: 3,
+	disco: 124,
+	twisted: 29,
+	zomb: 24,
+	plasma: 4,
+	voidtouched: 134,
+	pollinated: 2,
+	honeyglazed: 4,
+} as const;
+
+const fruitMultipliers = {
+	gold: 20,
+	rainbow: 50,
+	none: 1,
+} as const;
+
+const plantBaseData = {
+	easteregg: { weight: 2.85, threshold: 2.85, valueLow: 2256, multiplier: 277.5 },
+	moonflower: { weight: 1.9, threshold: 1.9, valueLow: 8574, multiplier: 2381 },
+	starfruit: { weight: 2.85, threshold: 2.85, valueLow: 13538, multiplier: 1666.6 },
+	pepper: { weight: 4.75, threshold: 4.75, valueLow: 7200, multiplier: 320 },
+	grape: { weight: 2.85, threshold: 2.85, valueLow: 7085, multiplier: 872 },
+	nightshade: { weight: 0.48, threshold: 0.48, valueLow: 3159, multiplier: 13850 },
+	mint: { weight: 0.95, threshold: 0.95, valueLow: 4738, multiplier: 5230 },
+	glowshroom: { weight: 0.7, threshold: 0.7, valueLow: 271, multiplier: 532.5 },
+	bloodbanana: { weight: 1.42, threshold: 1.42, valueLow: 5415, multiplier: 2670 },
+	beanstalk: { weight: 9.5, threshold: 9.5, valueLow: 18050, multiplier: 200 },
+	coconut: { weight: 13.31, threshold: 13.31, valueLow: 361, multiplier: 2.04 },
+	candyblossom: { weight: 2.85, threshold: 2.85, valueLow: 90250, multiplier: 11111.111 },
+	carrot: { weight: 0.24, threshold: 0.24, valueLow: 18, multiplier: 275 },
+	strawberry: { weight: 0.29, threshold: 0.29, valueLow: 14, multiplier: 175 },
+	blueberry: { weight: 0.17, threshold: 0.17, valueLow: 18, multiplier: 500 },
+	orangetulip: { weight: 0.0499, threshold: 0.0499, valueLow: 767, multiplier: 300000 },
+	tomato: { weight: 0.44, threshold: 0.44, valueLow: 27, multiplier: 120 },
+	daffodil: { weight: 0.16, threshold: 0.16, valueLow: 903, multiplier: 25000 },
+	watermelon: { weight: 7.3, threshold: 7.3, valueLow: 2708, multiplier: 61.25 },
+	pumpkin: { weight: 6.9, threshold: 6.9, valueLow: 3069, multiplier: 64 },
+	mushroom: { weight: 25.9, threshold: 25.9, valueLow: 136278, multiplier: 241.6 },
+	bamboo: { weight: 3.8, threshold: 3.8, valueLow: 3610, multiplier: 250 },
+	apple: { weight: 2.85, threshold: 2.85, valueLow: 248, multiplier: 30.53 },
+	corn: { weight: 1.9, threshold: 1.9, valueLow: 36, multiplier: 10 },
+	cactus: { weight: 6.65, threshold: 6.65, valueLow: 3069, multiplier: 69.4 },
+	cranberry: { weight: 0.95, threshold: 0.95, valueLow: 1805, multiplier: 2000 },
+	moonmelon: { weight: 7.6, threshold: 7.6, valueLow: 16245, multiplier: 281.2 },
+	pear: { weight: 2.85, threshold: 2.85, valueLow: 451, multiplier: 55.5 },
+	durian: { weight: 7.6, threshold: 7.6, valueLow: 4513, multiplier: 78.19 },
+	peach: { weight: 1.9, threshold: 1.9, valueLow: 271, multiplier: 75 },
+	cacao: { weight: 7.6, threshold: 7.6, valueLow: 9928, multiplier: 171.875 },
+	moonglow: { weight: 6.65, threshold: 6.65, valueLow: 18050, multiplier: 408.45 },
+	dragonfruit: { weight: 11.38, threshold: 11.38, valueLow: 4287, multiplier: 32.99 },
+	mango: { weight: 14.28, threshold: 14.28, valueLow: 5866, multiplier: 28.89 },
+	moonblossom: { weight: 2.85, threshold: 2.86, valueLow: 45125, multiplier: 5555.555 },
+	raspberry: { weight: 0.71, threshold: 0.71, valueLow: 90, multiplier: 177.5 },
+	eggplant: { weight: 4.75, threshold: 4.75, valueLow: 6769, multiplier: 300 },
+	papaya: { weight: 2.86, threshold: 2.86, valueLow: 903, multiplier: 111.11 },
+	celestiberry: { weight: 1.9, threshold: 1.9, valueLow: 7220, multiplier: 2000 },
+	moonmango: { weight: 14.25, threshold: 14.25, valueLow: 45125, multiplier: 222.22 },
+	banana: { weight: 1.425, threshold: 1.425, valueLow: 1579, multiplier: 777.77 },
+	passionfruit: { weight: 2.867, threshold: 2.867, valueLow: 3204, multiplier: 395 },
+	soulfruit: { weight: 23.75, threshold: 23.75, valueLow: 6994, multiplier: 12.4 },
+	chocolatecarrot: { weight: 0.2616, threshold: 0.2616, valueLow: 9928, multiplier: 145096 },
+	redlolipop: { weight: 3.7988, threshold: 3.7988, valueLow: 45125, multiplier: 3125 },
+	candysunflower: { weight: 1.428, threshold: 1.428, valueLow: 72200, multiplier: 35413 },
+	lotus: { weight: 18.99, threshold: 18.99, valueLow: 15343, multiplier: 42.5 },
+	pineapple: { weight: 2.85, threshold: 2.85, valueLow: 1805, multiplier: 222.5 },
+	hive: { weight: 7.614, threshold: 7.614, valueLow: 6318, multiplier: 109 },
+	lilac: { weight: 2.846, threshold: 2.846, valueLow: 31588, multiplier: 3899 },
+	rose: { weight: 0.95, threshold: 0.95, valueLow: 4513, multiplier: 5000 },
+	foxglove: { weight: 1.9, threshold: 1.9, valueLow: 18050, multiplier: 5000 },
+	purpledahlia: { weight: 11.4, threshold: 11.4, valueLow: 67688, multiplier: 522 },
+	sunflower: { weight: 14.23, threshold: 14.23, valueLow: 135000, multiplier: 666.6 },
+	pinklily: { weight: 5.699, threshold: 5.699, valueLow: 58663, multiplier: 1806.5 },
+	nectarine: { weight: 2.807, threshold: 2.807, valueLow: 35000, multiplier: 4440 },
+} as const;
+
+type PlantName = keyof typeof plantBaseData;
+type ModifierName = keyof typeof modifiers;
+type FruitType = keyof typeof fruitMultipliers;
+
+const plantNameMap: Record<string, PlantName> = {
+	"Carrot": "carrot",
+	"Strawberry": "strawberry",
+	"Blueberry": "blueberry",
+	"Orange Tulip": "orangetulip",
+	"Tomato": "tomato",
+	"Corn": "corn",
+	"Daffodil": "daffodil",
+	"Watermelon": "watermelon",
+	"Pumpkin": "pumpkin",
+	"Apple": "apple",
+	"Bamboo": "bamboo",
+	"Coconut": "coconut",
+	"Cactus": "cactus",
+	"Dragon Fruit": "dragonfruit",
+	"Mango": "mango",
+	"Grape": "grape",
+	"Mushroom": "mushroom",
+	"Pepper": "pepper",
+	"Cacao": "cacao",
+	"Beanstalk": "beanstalk",
+	"Pear": "pear",
+	"Raspberry": "raspberry",
+	"Pineapple": "pineapple",
+	"Peach": "peach",
+	"Papaya": "papaya",
+	"Banana": "banana",
+	"Passionfruit": "passionfruit",
+	"Soul Fruit": "soulfruit",
+	"Cursed Fruit": "durian",
+	"Chocolate Carrot": "chocolatecarrot",
+	"Red Lollipop": "redlolipop",
+	"Candy Sunflower": "candysunflower",
+	"Easter Egg": "easteregg",
+	"Candy Blossom": "candyblossom",
+	"Nightshade": "nightshade",
+	"Glowshroom": "glowshroom",
+	"Mint": "mint",
+	"Moonflower": "moonflower",
+	"Starfruit": "starfruit",
+	"Moonglow": "moonglow",
+	"Moon Blossom": "moonblossom",
+	"Foxglove": "foxglove",
+	"Lilac": "lilac",
+	"Pink Lily": "pinklily",
+	"Purple Dahila": "purpledahlia",
+	"Hive Fruit": "hive",
+	"Sunflower": "sunflower",
+	"Nectarine": "nectarine",
+};
+
+const envMutationToModifier: Record<string, ModifierName> = {
+	"Wet": "wet",
+	"Chilled": "chilled",
+	"Frozen": "frozen",
+	"Chocolate": "choc",
+	"Moonlit": "moonlit",
+	"Pollinated": "pollinated",
+	"Bloodlit": "bloodlit",
+	"Plasma": "plasma",
+	"Honey Glazed": "honeyglazed",
+	"Zombified": "zomb",
+	"Twisted": "twisted",
+	"Shocked": "shocked",
+	"Celestial": "celestial",
+	"Disco": "disco",
+	"Voidtouched": "voidtouched",
+};
+
+const coreMutationToFruit: Record<string, FruitType> = {
+	"1": "none",
+	"20": "gold",
+	"50": "rainbow",
+};
+
+function calculatePlantValue(
+	plant: PlantName,
+	weight: number,
+	modifiersList: ModifierName[],
+	fruit: FruitType
+): number {
+	const plantData = plantBaseData[plant]
+	if (!plantData) return 0
+	const useValueLow = weight <= plantData.threshold
+	const baseValue = useValueLow
+		? plantData.valueLow
+		: plantData.multiplier * Math.pow(weight, 2)
+	const modSum = modifiersList.reduce((sum, mod) => sum + (modifiers[mod] || 0), 0)
+	const modifierFactor = 1 + modSum
+	const fruitFactor = fruitMultipliers[fruit] || 1
+	const finalValue = Math.ceil(baseValue * fruitFactor * modifierFactor)
+	return finalValue
+}
+
+function getFinalValueFromUI(
+	selectedPlant: { name: string; value: number } | null,
+	customValue: string,
+	weight: string,
+	envMutations: string[],
+	coreMutation: string
+) {
+	if (!selectedPlant || selectedPlant.name === "Custom Value") {
+		return Math.round(Number(customValue) || 0)
+	}
+	const plantKey = plantNameMap[selectedPlant.name]
+	if (!plantKey) return 0
+	const weightNum = Number.parseFloat(weight) || 0
+	const activeModifiers = envMutations.map((m: string) => envMutationToModifier[m]).filter(Boolean) as ModifierName[]
+	const fruit = coreMutationToFruit[coreMutation] || "none"
+	return calculatePlantValue(plantKey, weightNum, activeModifiers, fruit)
+}
+
 export default function GardenCalculator() {
 	const [selectedPlant, setSelectedPlant] = useState<{ name: string; value: number } | null>(null)
 	const [customValue, setCustomValue] = useState<string>("")
@@ -131,7 +330,6 @@ export default function GardenCalculator() {
 		setMounted(true)
 	}, [])
 
-	// Flatten all plants for search
 	const allPlants = useMemo(() => {
 		const plants = plantData.flatMap((category) =>
 			category.plants.map((plant) => ({
@@ -143,7 +341,6 @@ export default function GardenCalculator() {
 		return plants
 	}, [])
 
-	// Filter plants based on search term
 	const filteredPlants = useMemo(() => {
 		if (!searchTerm) return allPlants
 		return allPlants.filter(
@@ -157,9 +354,17 @@ export default function GardenCalculator() {
 		if (plant.name === "Custom Value") {
 			setSelectedPlant({ name: "Custom Value", value: 0 })
 			setCustomValue("")
+			setWeight("1")
 		} else {
 			setSelectedPlant({ name: plant.name, value: plant.value })
 			setCustomValue("")
+			// Ustaw domyślną wagę z plantBaseData
+			const plantKey = plantNameMap[plant.name]
+			if (plantKey && plantBaseData[plantKey]) {
+				setWeight(plantBaseData[plantKey].weight.toString())
+			} else {
+				setWeight("1")
+			}
 		}
 		setSearchTerm(plant.name === "Custom Value" ? "" : plant.name)
 		setShowDropdown(false)
@@ -187,11 +392,11 @@ export default function GardenCalculator() {
 		let newMutations = [...envMutations]
 
 		if (checked) {
-			// Remove exclusive mutations
+
 			if (mutation.exclusive) {
 				newMutations = newMutations.filter((m) => !mutation.exclusive!.includes(m))
 			}
-			// Remove mutations that exclude this one
+
 			newMutations = newMutations.filter((m) => {
 				const existingMutation = environmentalMutations.find((em) => em.name === m)
 				return !existingMutation?.exclusive?.includes(mutationName)
@@ -208,24 +413,11 @@ export default function GardenCalculator() {
 		if (selectedPlant?.name === "Custom Value") {
 			return Number.parseFloat(customValue) || 0
 		}
-		return selectedPlant?.value || 0
+		const plantKey = plantNameMap[selectedPlant?.name || ""]
+		if (!plantKey) return 0
+		const weightNum = Number.parseFloat(weight) || 0
+		return calculatePlantValue(plantKey, weightNum, [], "none")
 	}
-
-	const calculateValue = () => {
-		const baseValue = getBaseValue()
-		const weightValue = Number.parseFloat(weight) || 0
-		const coreMultiplier = Number.parseFloat(coreMutation) || 1
-
-		const stackSum = envMutations.reduce((sum, mutationName) => {
-			const mutation = environmentalMutations.find((m) => m.name === mutationName)
-			return sum + (mutation?.bonus || 0)
-		}, 0)
-
-		const totalValue = (baseValue * (1 + stackSum)) * coreMultiplier * weightValue
-		return totalValue
-	}
-
-	const estimatedValue = calculateValue()
 
 	const ThemeToggle = () => {
 		if (!mounted) return null
@@ -325,9 +517,9 @@ export default function GardenCalculator() {
 			animate={
 				isThemeChanging
 					? {
-							filter: ["brightness(1)", "brightness(0.8)", "brightness(1)"],
-							scale: [1, 0.98, 1],
-					  }
+						filter: ["brightness(1)", "brightness(0.8)", "brightness(1)"],
+						scale: [1, 0.98, 1],
+					}
 					: {}
 			}
 		>
@@ -415,7 +607,7 @@ export default function GardenCalculator() {
 												setShowDropdown(true)
 											}}
 											onFocus={() => setShowDropdown(true)}
-											className="bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm border-green-300/50 dark:border-gray-600/50 text-gray-800 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 rounded-2xl h-12 px-4 pr-12 transition-all duration-300" // pr-12 for space for the X
+											className="bg-white/70 dark:bg-gray-700/70 backdrop-blur-sm border-green-300/50 dark:border-gray-600/50 text-gray-800 dark:text-gray-100 placeholder:text-gray-500 dark:placeholder:text-gray-400 rounded-2xl h-12 px-4 pr-12 transition-all duration-300"
 											autoComplete="off"
 										/>
 										{searchTerm && (
@@ -650,7 +842,7 @@ export default function GardenCalculator() {
 									initial={{ opacity: 0, y: 10 }}
 									animate={{ opacity: 1, y: 0 }}
 									transition={{ duration: 0.3 }}
-									key={estimatedValue.toString()}
+									key={getFinalValueFromUI(selectedPlant, customValue, weight, envMutations, coreMutation).toString()}
 								>
 									<motion.div whileHover={{ scale: 1.01 }} transition={{ type: "spring", stiffness: 300, damping: 20 }}>
 										<Card className="bg-green-100/80 dark:bg-gray-700/80 backdrop-blur-xl border-green-300/50 dark:border-gray-600/50 rounded-3xl shadow-lg">
@@ -704,8 +896,8 @@ export default function GardenCalculator() {
 															<span className="text-xl">💰</span> Total Value:
 														</span>
 														<span className="font-mono text-xl">
-															$
-															{Math.round(estimatedValue).toLocaleString()}
+															≈$
+															{getFinalValueFromUI(selectedPlant, customValue, weight, envMutations, coreMutation).toLocaleString()}
 														</span>
 													</motion.div>
 												</div>
