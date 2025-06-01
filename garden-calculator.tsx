@@ -202,6 +202,11 @@ type ModifierName = keyof typeof modifiers;
 type FruitType = keyof typeof fruitMultipliers;
 
 const plantNameMap: Record<string, PlantName> = {
+	"Celestiberry": "celestiberry",
+  "Moonmango": "moonmango",
+  "Eggplant": "eggplant",
+  "Bloodbanana": "bloodbanana",
+  "Lotus": "lotus",
 	"Carrot": "carrot",
 	"Strawberry": "strawberry",
 	"Blueberry": "blueberry",
