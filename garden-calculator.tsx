@@ -70,6 +70,16 @@ const plantData = [
 		],
 	},
 	{
+		category: "Angry Plant Event",
+		plants: [
+			{ name: "Cranberry", value: 1805 },
+			{ name: "Durian", value: 4513 },
+			{ name: "Eggplant", value: 6769 },
+			{ name: "Venus Fly Trap", value: 17000 },
+			{ name: "Lotus", value: 20000 },
+		],
+	},
+	{
 		category: "Lunar Glow Event",
 		plants: [
 			{ name: "Nightshade", value: 2000 },
@@ -79,6 +89,13 @@ const plantData = [
 			{ name: "Starfruit", value: 15538 },
 			{ name: "Moonglow", value: 18000 },
 			{ name: "Moon Blossom", value: 45125 },
+		],
+	},
+	{
+		category: "Blood Moon Shop",
+		plants: [
+			{ name: "Blood Banana", value: 5415 },
+			{ name: "Moon Melon", value: 16245 },
 		],
 	},
 	{
