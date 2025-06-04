@@ -114,8 +114,8 @@ const plantData = [
 ]
 
 const environmentalMutations = [
-	{ name: "Wet", emoji: "💧", bonus: 1, color: "text-blue-500 dark:text-blue-400", exclusive: ["Frozen"] },
-	{ name: "Chilled", emoji: "❄️", bonus: 1, color: "text-blue-500 dark:text-blue-400", exclusive: ["Frozen"] },
+	{ name: "Wet", emoji: "💧", bonus: 1, color: "text-blue-500 dark:text-blue-400", exclusive: ["Frozen", "Chilled"] },
+	{ name: "Chilled", emoji: "❄️", bonus: 1, color: "text-blue-500 dark:text-blue-400", exclusive: ["Frozen", "Wet"] },
 	{ name: "Frozen", emoji: "🧊", bonus: 9, color: "text-blue-600 dark:text-blue-300", exclusive: ["Wet", "Chilled"] },
 	{ name: "Chocolate", emoji: "🍫", bonus: 1, color: "text-amber-800 dark:text-amber-600" },
 	{ name: "Moonlit", emoji: "🌙", bonus: 1, color: "text-purple-600 dark:text-purple-400" },
