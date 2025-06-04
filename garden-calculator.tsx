@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
 import { motion, AnimatePresence } from "framer-motion"
 import { useTheme } from "next-themes"
-import { Moon, Sun, Monitor } from "lucide-react"
+import { Moon, Sun, Monitor, MessageCircle } from "lucide-react"
 
 const plantData = [
 	{
@@ -392,6 +392,27 @@ export default function GardenCalculator() {
 		setSearchTerm(plant.name === "Custom Value" ? "" : plant.name)
 		setShowDropdown(false)
 	}
+	const GitHubButton = () => {
+		if (!mounted) return null
+
+		return (
+			<motion.div
+				whileHover={{ scale: 1.1 }}
+				whileTap={{ scale: 0.9 }}
+				transition={{ type: "spring", stiffness: 400, damping: 17 }}
+			>
+				<Button
+					variant="ghost"
+					size="sm"
+					onClick={() => window.open("https://discord.gg/GmdrRxhCzv", "_blank")}
+					className="rounded-2xl h-10 w-10 p-0 bg-gray-200/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300/30 dark:border-gray-600/30 hover:bg-gray-300/50 dark:hover:bg-gray-600/50 transition-all duration-300"
+					title="Contact me if you want to add more plants or features!"
+				>
+					<MessageCircle className="h-5 w-5 text-gray-700 dark:text-gray-300" />
+				</Button>
+			</motion.div>
+		)
+	}
 
 	const handleThemeChange = (newTheme: string, event: React.MouseEvent) => {
 		const rect = event.currentTarget.getBoundingClientRect()
@@ -548,7 +569,8 @@ export default function GardenCalculator() {
 		>
 			<div className="max-w-7xl mx-auto">
 				{/* Theme Toggle */}
-				<div className="flex justify-end mb-4">
+				<div className="flex justify-end items-center gap-3 mb-4">
+					<GitHubButton />
 					<ThemeToggle />
 				</div>
 
