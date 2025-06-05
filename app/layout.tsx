@@ -3,7 +3,6 @@ import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata = {
-  title: "🌱 Grow a Garden Mutation Calculator",
   description: "Calculate plant mutation values for the Grow a Garden game"
 }
 
