@@ -404,7 +404,7 @@ export default function GardenCalculator() {
 				<Button
 					variant="ghost"
 					size="sm"
-					onClick={() => window.open("https://discord.gg/GmdrRxhCzv", "_blank")}
+					onClick={() => window.open("https://discord.gg/bHFAADuGpf", "_blank")}
 					className="rounded-2xl h-10 w-10 p-0 bg-gray-200/50 dark:bg-gray-700/50 backdrop-blur-sm border border-gray-300/30 dark:border-gray-600/30 hover:bg-gray-300/50 dark:hover:bg-gray-600/50 transition-all duration-300"
 					title="Contact me if you want to add more plants or features!"
 				>
