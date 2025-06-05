@@ -33,7 +33,7 @@ export default function RootLayout({
         <meta name="twitter:title" content="🌱 Grow a Garden Mutation Calculator" />
         <meta name="twitter:description" content="Calculate plant mutation values for the Grow a Garden game. Fast, accurate, and easy Grow a Garden calculator for prices, mutations, and more!" />
         <meta name="twitter:image" content="https://twoja-strona.pl/og-image.png" />
-        <meta name="google-site-verification" content="google-site-verification: googlee00a81f70db92498.html" />
+        <meta name="google-site-verification" content="Lw-9GsD6QG8Xs8zNqN46umeHSN4ofvRvqyLmDvb9AMA" />
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
